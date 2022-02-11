@@ -28,17 +28,6 @@
                         <SymbolIcon Symbol="Library" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItemHeader Content="Actions"/>
-                <muxc:NavigationViewItem Content="Save config as" Tag="SamplePage2" x:Name="SamplePage2Item" SelectsOnInvoked="True">
-                    <muxc:NavigationViewItem.Icon>
-                        <SymbolIcon Symbol="Save" />
-                    </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem Content="Open config" Tag="SamplePage3" x:Name="SamplePage3Item">
-                    <muxc:NavigationViewItem.Icon>
-                        <SymbolIcon Symbol="OpenFile" />
-                    </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>
             </muxc:NavigationView.MenuItems>
 
             <Frame x:Name="contentFrame" />

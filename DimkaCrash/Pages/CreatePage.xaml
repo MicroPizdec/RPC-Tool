@@ -41,7 +41,7 @@
             VerticalScrollMode="Auto">
             <StackPanel HorizontalAlignment="Left">
                 <StackPanel>
-                    <TextBox x:Name="ClientIDTextBox" Header="Enter ID of app:" PlaceholderText="ClientID" />
+                    <TextBox x:Name="ClientIDTextBox" Header="Enter ID of app:" PlaceholderText="ClientID" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <StackPanel>
@@ -49,8 +49,8 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="Text" />
-                    <TextBox x:Name="DetailsTextBox" Header="Top text:" PlaceholderText="Details" />
-                    <TextBox x:Name="StateTextBox" Header="Bottom text:" PlaceholderText="State" />
+                    <TextBox x:Name="DetailsTextBox" Header="Top text:" PlaceholderText="Details" Margin="0,10,0,0" />
+                    <TextBox x:Name="StateTextBox" Header="Bottom text:" PlaceholderText="State" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <StackPanel>
@@ -58,8 +58,8 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="Timestamp" />
-                    <TextBox Header="Start:" PlaceholderText="Details" />
-                    <TextBox Header="End:" PlaceholderText="Details" />
+                    <TextBox Header="Start:" PlaceholderText="Details" Margin="0,10,0,0" />
+                    <TextBox Header="End:" PlaceholderText="Details" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <StackPanel>
@@ -67,8 +67,8 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="Large image" />
-                    <TextBox x:Name="LargeImageKeyTextBox" Header="Key:" PlaceholderText="Details" />
-                    <TextBox x:Name="LargeImageTextBox" Header="Text:" PlaceholderText="Text of large image when you hover over it" />
+                    <TextBox x:Name="LargeImageKeyTextBox" Header="Key:" PlaceholderText="Details" Margin="0,10,0,0" />
+                    <TextBox x:Name="LargeImageTextBox" Header="Text:" PlaceholderText="Text of large image when you hover over it" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <StackPanel>
@@ -76,8 +76,8 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="Small image" />
-                    <TextBox x:Name="SmallImageKeyTextBox" Header="Key:" PlaceholderText="Pretty self-explanatory" />
-                    <TextBox x:Name="SmallImageTextBox" Header="Text:" PlaceholderText="Pretty self-explanatory too" />
+                    <TextBox x:Name="SmallImageKeyTextBox" Header="Key:" PlaceholderText="Pretty self-explanatory" Margin="0,10,0,0" />
+                    <TextBox x:Name="SmallImageTextBox" Header="Text:" PlaceholderText="Pretty self-explanatory too" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <StackPanel>
@@ -85,10 +85,10 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="Garbage" />
-                    <TextBox Header="Party ID:" PlaceholderText="Any value" />
-                    <TextBox Header="Party size:" PlaceholderText="0 to disable" />
-                    <TextBox Header="Party max:" PlaceholderText="0 to disable" />
-                    <TextBox Header="Join secret:" PlaceholderText="Any value" />
+                    <TextBox Header="Party ID:" PlaceholderText="Any value" Margin="0,10,0,0" />
+                    <TextBox Header="Party size:" PlaceholderText="0 to disable" Margin="0,10,0,0" />
+                    <TextBox Header="Party max:" PlaceholderText="0 to disable" Margin="0,10,0,0" />
+                    <TextBox Header="Join secret:" PlaceholderText="Any value" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <TextBlock
@@ -96,7 +96,7 @@
                     Margin="0,40,0,0"
                     Text="Ready?" />
                 <Button x:Name="GoButton" Style="{StaticResource AccentButtonStyle}" Content="Go!" Click="GoButton_Click" />
-                <Button Content="Stop" IsEnabled="False" />
+                <Button Content="Stop" IsEnabled="False" Margin="0,10,0,0" />
 
                 <TeachingTip x:Name="StartSuccess"
 	                    Target="{x:Bind GoButton}"

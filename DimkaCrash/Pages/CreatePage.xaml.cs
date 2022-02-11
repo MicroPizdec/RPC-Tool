@@ -59,6 +59,10 @@ namespace DimkaCrash.Pages
                     SmallImageText = SmallImageTextBox.Text,
                 }
             });
+
+            GoButton.IsEnabled = false;
         }
+
+
     }
 }
