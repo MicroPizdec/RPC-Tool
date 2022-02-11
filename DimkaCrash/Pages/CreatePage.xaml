@@ -41,7 +41,7 @@
             VerticalScrollMode="Auto">
             <StackPanel HorizontalAlignment="Left">
                 <StackPanel>
-                    <TextBox Header="Enter ID of app:" PlaceholderText="ClientID" />
+                    <TextBox x:Name="ClientIDTextBox" Header="Enter ID of app:" PlaceholderText="ClientID" />
                 </StackPanel>
 
                 <StackPanel>
@@ -49,8 +49,8 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="Text" />
-                    <TextBox Header="Top text:" PlaceholderText="Details" />
-                    <TextBox Header="Bottom text:" PlaceholderText="State" />
+                    <TextBox x:Name="DetailsTextBox" Header="Top text:" PlaceholderText="Details" />
+                    <TextBox x:Name="StateTextBox" Header="Bottom text:" PlaceholderText="State" />
                 </StackPanel>
 
                 <StackPanel>
@@ -67,8 +67,8 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="Large image" />
-                    <TextBox Header="Key:" PlaceholderText="Details" />
-                    <TextBox Header="Text:" PlaceholderText="Text of large image when you hover over it" />
+                    <TextBox x:Name="LargeImageKeyTextBox" Header="Key:" PlaceholderText="Details" />
+                    <TextBox x:Name="LargeImageTextBox" Header="Text:" PlaceholderText="Text of large image when you hover over it" />
                 </StackPanel>
 
                 <StackPanel>
@@ -76,8 +76,8 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="Small image" />
-                    <TextBox Header="Key:" PlaceholderText="Pretty self-explanatory" />
-                    <TextBox Header="Text:" PlaceholderText="Pretty self-explanatory too" />
+                    <TextBox x:Name="SmallImageKeyTextBox" Header="Key:" PlaceholderText="Pretty self-explanatory" />
+                    <TextBox x:Name="SmallImageTextBox" Header="Text:" PlaceholderText="Pretty self-explanatory too" />
                 </StackPanel>
 
                 <StackPanel>
@@ -95,7 +95,16 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="Ready?" />
-                <Button Style="{StaticResource AccentButtonStyle}" Content="Go!" />
+                <Button x:Name="GoButton" Style="{StaticResource AccentButtonStyle}" Content="Go!" Click="GoButton_Click" />
+                <Button Content="Stop" IsEnabled="False" />
+
+                <TeachingTip x:Name="StartSuccess"
+	                    Target="{x:Bind GoButton}"
+	                    Title="Your RPC started successfully!">
+                        <TeachingTip.IconSource>
+                        <SymbolIconSource Symbol="Accept" />
+                        </TeachingTip.IconSource>
+                </TeachingTip>
             </StackPanel>
         </ScrollViewer>
     </Grid>

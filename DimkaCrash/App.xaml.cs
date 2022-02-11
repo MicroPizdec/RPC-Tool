@@ -44,6 +44,7 @@ namespace DimkaCrash
         {
             m_window = new MainWindow();
             m_window.Activate();
+            m_window.Title = "RPC-Tool"; // шоб не было WinUI Desktop в заголовке 
         }
 
         private Window m_window;
