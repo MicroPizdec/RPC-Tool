@@ -1,0 +1,102 @@
+﻿<Page
+    x:Class="DimkaCrash.Pages.CreatePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DimkaCrash.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition />
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource Breakpoint640Plus}" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="contentSV.Padding" Value="14,0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <ScrollViewer
+            x:Name="contentSV"
+            Grid.Row="1"
+            Padding="56,0,0,0"
+            IsTabStop="False"
+            UseSystemFocusVisuals="False"
+            VerticalScrollBarVisibility="Auto"
+            VerticalScrollMode="Auto">
+            <StackPanel HorizontalAlignment="Left">
+                <StackPanel>
+                    <TextBox Header="Enter ID of app:" PlaceholderText="ClientID" />
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Text" />
+                    <TextBox Header="Top text:" PlaceholderText="Details" />
+                    <TextBox Header="Bottom text:" PlaceholderText="State" />
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Timestamp" />
+                    <TextBox Header="Start:" PlaceholderText="Details" />
+                    <TextBox Header="End:" PlaceholderText="Details" />
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Large image" />
+                    <TextBox Header="Key:" PlaceholderText="Details" />
+                    <TextBox Header="Text:" PlaceholderText="Text of large image when you hover over it" />
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Small image" />
+                    <TextBox Header="Key:" PlaceholderText="Pretty self-explanatory" />
+                    <TextBox Header="Text:" PlaceholderText="Pretty self-explanatory too" />
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Garbage" />
+                    <TextBox Header="Party ID:" PlaceholderText="Any value" />
+                    <TextBox Header="Party size:" PlaceholderText="0 to disable" />
+                    <TextBox Header="Party max:" PlaceholderText="0 to disable" />
+                    <TextBox Header="Join secret:" PlaceholderText="Any value" />
+                </StackPanel>
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Ready?" />
+                <Button Style="{StaticResource AccentButtonStyle}" Content="Go!" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

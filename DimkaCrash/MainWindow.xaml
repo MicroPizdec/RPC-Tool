@@ -1,0 +1,61 @@
+﻿<Window
+    x:Class="DimkaCrash.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DimkaCrash"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d">
+
+    <Grid>
+        <muxc:NavigationView x:Name="nvSample"
+          IsSettingsVisible="True"
+          IsBackButtonVisible="Auto"
+          IsBackEnabled="False"
+          SelectionChanged="NavigationView_SelectionChanged"
+          Header="Welcome!"
+          AlwaysShowHeader="True"
+          PaneTitle="github.com/MicroPizdec"
+          PaneDisplayMode="Left"
+          ExpandedModeThresholdWidth="500"
+          SelectionFollowsFocus="Disabled"
+          IsTabStop="False">
+
+            <muxc:NavigationView.MenuItems>
+                <muxc:NavigationViewItem Content="Create" Tag="CreatePage" x:Name="CreatePageItem">
+                    <muxc:NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Library" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                <muxc:NavigationViewItemHeader Content="Actions"/>
+                <muxc:NavigationViewItem Content="Save config as" Tag="SamplePage2" x:Name="SamplePage2Item" SelectsOnInvoked="True">
+                    <muxc:NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Save" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                <muxc:NavigationViewItem Content="Open config" Tag="SamplePage3" x:Name="SamplePage3Item">
+                    <muxc:NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="OpenFile" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+            </muxc:NavigationView.MenuItems>
+
+            <muxc:NavigationView.PaneCustomContent>
+                <HyperlinkButton x:Name="PaneHyperlink" Content="More info" Margin="12,0" Visibility="Collapsed" />
+            </muxc:NavigationView.PaneCustomContent>
+
+            <muxc:NavigationView.PaneFooter>
+                <StackPanel x:Name="FooterStackPanel" Orientation="Vertical" Visibility="Collapsed">
+                    <muxc:NavigationViewItem Icon="Download" AutomationProperties.Name="download" />
+                    <muxc:NavigationViewItem Icon="Favorite" AutomationProperties.Name="favorite" />
+                </StackPanel>
+            </muxc:NavigationView.PaneFooter>
+
+            <Frame x:Name="contentFrame" />
+        </muxc:NavigationView>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <TextBlock>WIP, PRODUCT NOT FINAL</TextBlock>
+        </StackPanel>
+    </Grid>
+</Window> 

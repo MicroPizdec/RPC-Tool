@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DimkaCrash (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "DimkaCrash (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
