@@ -10,7 +10,7 @@
     <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
-    <ApplicationIcon>vladimirMatoi.ico</ApplicationIcon>
+    <ApplicationIcon>RPCTool.ico</ApplicationIcon>
     <StartupObject></StartupObject>
     <Nullable>disable</Nullable>
   </PropertyGroup>
@@ -45,7 +45,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="vladimirMatoi.ico" />
+    <Content Include="RPCTool.ico" />
   </ItemGroup>
 
   <ItemGroup>
