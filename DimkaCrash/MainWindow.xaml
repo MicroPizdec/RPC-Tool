@@ -17,7 +17,7 @@
           Header="Welcome!"
           AlwaysShowHeader="True"
           PaneTitle="Menu"
-          PaneDisplayMode="Left"
+          PaneDisplayMode="Top"
           ExpandedModeThresholdWidth="500"
           SelectionFollowsFocus="Disabled"
           IsTabStop="False">
