@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Timers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using DiscordRPC;
@@ -25,31 +26,62 @@ namespace DimkaCrash
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        public DiscordRpcClient client;
+        public Timer timer;
+
         public MainWindow()
         {
             this.InitializeComponent();
         }
 
-        private void NavigationView_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
+        public void GoButton_Click(object sender, RoutedEventArgs eventArgs)
         {
-            if (args.IsSettingsSelected)
-            {
-                contentFrame.Navigate(typeof(SettingsPage));
-                sender.Header = "Settings";
-            }
-            else
-            {
-                var selectedItem = (Microsoft.UI.Xaml.Controls.NavigationViewItem)args.SelectedItem;
+            client = new DiscordRpcClient(ClientIDTextBox.Text);
 
-                if (selectedItem != null)
+            client.OnPresenceUpdate += (sender, e) =>
+            {
+                StartSuccess.IsOpen = true;
+            };
+
+            client.OnConnectionFailed += (sender, e) =>
+            {
+                StartFailed.IsOpen = true;
+                GoButton.IsEnabled = true;
+                StopButton.IsEnabled = false;
+            };
+
+            GoButton.IsEnabled = false;
+            StopButton.IsEnabled = true;
+
+            timer = new Timer(150);
+            timer.Elapsed += (sender, e) => { client.Invoke(); }; 
+            timer.Start();
+
+            client.Initialize();
+
+            client.SetPresence(new RichPresence()
+            {
+                Details = DetailsTextBox.Text,
+                State = StateTextBox.Text,
+                Assets = new Assets()
                 {
-                    string selectedItemTag = ((string)selectedItem.Tag);
-                    sender.Header = "RPC-Tool";
-                    string pageName = "DimkaCrash.Pages." + selectedItemTag;
-                    Type pageType = Type.GetType(pageName);
-                    contentFrame.Navigate(pageType);
+                    LargeImageKey = LargeImageKeyTextBox.Text,
+                    LargeImageText = LargeImageTextBox.Text,
+                    SmallImageKey = SmallImageKeyTextBox.Text,
+                    SmallImageText = SmallImageTextBox.Text,
                 }
-            }
+            });
+        }
+
+        public void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
+            client.Dispose();
+  
+            StopSuccess.IsOpen = true;
+
+            GoButton.IsEnabled = true;
+            StopButton.IsEnabled = false;
         }
     }
 }

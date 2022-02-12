@@ -9,29 +9,116 @@
     mc:Ignorable="d">
 
     <Grid>
-        <muxc:NavigationView x:Name="nvSample"
-          IsSettingsVisible="True"
-          IsBackButtonVisible="Auto"
-          IsBackEnabled="False"
-          SelectionChanged="NavigationView_SelectionChanged"
-          Header="Welcome!"
-          AlwaysShowHeader="True"
-          PaneTitle="Menu"
-          PaneDisplayMode="Top"
-          ExpandedModeThresholdWidth="500"
-          SelectionFollowsFocus="Disabled"
-          IsTabStop="False">
+        <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+            <AppBarButton Icon="Add" Label="New config"/>
+            <AppBarButton Icon="Save" Label="Save config"/>
+            <AppBarButton Icon="OpenFile" Label="Open config"/>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Setting" Label="Settings">
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="I" />
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
 
-            <muxc:NavigationView.MenuItems>
-                <muxc:NavigationViewItem Content="Create" Tag="CreatePage" x:Name="CreatePageItem">
-                    <muxc:NavigationViewItem.Icon>
-                        <SymbolIcon Symbol="Library" />
-                    </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>
-            </muxc:NavigationView.MenuItems>
+        <ScrollViewer
+            x:Name="contentSV"
+            Grid.Row="1"
+            Padding="56,100,0,0"
+            IsTabStop="False"
+            UseSystemFocusVisuals="False"
+            VerticalScrollBarVisibility="Auto"
+            VerticalScrollMode="Auto">
+            <StackPanel HorizontalAlignment="Left">
+                <StackPanel>
+                    <TextBox x:Name="ClientIDTextBox" Header="Enter ID of app:" PlaceholderText="ClientID" Margin="0,10,0,0" />
+                </StackPanel>
 
-            <Frame x:Name="contentFrame" />
-        </muxc:NavigationView>
+                <StackPanel>
+                    <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Text" />
+                    <TextBox x:Name="DetailsTextBox" Header="Top text:" PlaceholderText="Details" Margin="0,10,0,0" />
+                    <TextBox x:Name="StateTextBox" Header="Bottom text:" PlaceholderText="State" Margin="0,10,0,0" />
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Timestamp" />
+                    <TextBox Header="Start:" PlaceholderText="Details" Margin="0,10,0,0" />
+                    <TextBox Header="End:" PlaceholderText="Details" Margin="0,10,0,0" />
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Large image" />
+                    <TextBox x:Name="LargeImageKeyTextBox" Header="Key:" PlaceholderText="Details" Margin="0,10,0,0" />
+                    <TextBox x:Name="LargeImageTextBox" Header="Text:" PlaceholderText="Text of large image when you hover over it" Margin="0,10,0,0" />
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Small image" />
+                    <TextBox x:Name="SmallImageKeyTextBox" Header="Key:" PlaceholderText="Pretty self-explanatory" Margin="0,10,0,0" />
+                    <TextBox x:Name="SmallImageTextBox" Header="Text:" PlaceholderText="Pretty self-explanatory too" Margin="0,10,0,0" />
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Garbage" />
+                    <TextBox Header="Party ID:" PlaceholderText="Any value" Margin="0,10,0,0" />
+                    <TextBox Header="Party size:" PlaceholderText="0 to disable" Margin="0,10,0,0" />
+                    <TextBox Header="Party max:" PlaceholderText="0 to disable" Margin="0,10,0,0" />
+                    <TextBox Header="Join secret:" PlaceholderText="Any value" Margin="0,10,0,0" />
+                </StackPanel>
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Ready?" />
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Button x:Name="GoButton" Style="{StaticResource AccentButtonStyle}" Content="Go!" Click="GoButton_Click" />
+                    <Button x:Name="StopButton" Content="Stop" IsEnabled="False" Margin="10,0,0,0" Click="StopButton_Click" />
+                </StackPanel>
+
+                <TeachingTip x:Name="StartSuccess"
+	                    Target="{x:Bind GoButton}"
+	                    Title="Your RPC started successfully!">
+                    <TeachingTip.IconSource>
+                        <SymbolIconSource Symbol="Accept" />
+                    </TeachingTip.IconSource>
+                </TeachingTip>
+                
+                <TeachingTip x:Name="StopSuccess"
+	                    Target="{x:Bind StopButton}"
+	                    Title="Your RPC stopped successfully">
+                    <TeachingTip.IconSource>
+                        <SymbolIconSource Symbol="Pause" />
+                    </TeachingTip.IconSource>
+                </TeachingTip>
+
+                <TeachingTip x:Name="StartFailed"
+	                    Target="{x:Bind GoButton}"
+	                    Title="Failed to start your RPC"
+                        Subtitle="Did you exactly provide correct ClientID?">
+                    <TeachingTip.IconSource>
+                        <SymbolIconSource Symbol="Cancel" />
+                    </TeachingTip.IconSource>
+                </TeachingTip>
+                
+            </StackPanel>
+        </ScrollViewer>
+        
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <TextBlock>WIP, PRODUCT NOT FINAL</TextBlock>
         </StackPanel>
