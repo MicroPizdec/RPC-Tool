@@ -1,5 +1,4 @@
-﻿using DimkaCrash.Pages;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -75,7 +74,12 @@ namespace DimkaCrash
                     LargeImageKey = LargeImageKeyTextBox.Text,
                     LargeImageText = LargeImageTextBox.Text,
                     SmallImageKey = SmallImageKeyTextBox.Text,
-                    SmallImageText = SmallImageTextBox.Text,
+                    SmallImageText = SmallImageTextBox.Text
+                },
+                Timestamps = new Timestamps()
+                {
+                    StartUnixMilliseconds = ulong.Parse(StartTextBox.Text),
+                    EndUnixMilliseconds = ulong.Parse(EndTextBox.Text)
                 }
             });
         }

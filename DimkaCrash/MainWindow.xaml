@@ -50,8 +50,8 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="Timestamp" />
-                    <TextBox Header="Start:" PlaceholderText="Details" Margin="0,10,0,0" />
-                    <TextBox Header="End:" PlaceholderText="Details" Margin="0,10,0,0" />
+                    <TextBox x:Name="StartTextBox" Header="Start:" PlaceholderText="Details" Margin="0,10,0,0" />
+                    <TextBox x:Name="EndTextBox" Header="End:" PlaceholderText="Details" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <StackPanel>
