@@ -38,7 +38,7 @@ namespace DimkaCrash
         {
             client = new DiscordRpcClient(ClientIDTextBox.Text);
 
-            client.OnPresenceUpdate += (sender, e) =>
+            client.OnReady += (sender, e) =>
             {
                 StartSuccess.IsOpen = true;
             };
@@ -50,12 +50,19 @@ namespace DimkaCrash
                 StopButton.IsEnabled = false;
             };
 
+            client.OnError += (sender, e) =>
+            {
+                StartFailed.IsOpen = true;
+                GoButton.IsEnabled = true;
+                StopButton.IsEnabled = false;
+            };
+
+            timer = new Timer(100);
+            timer.Elapsed += (sender, e) => { client.Invoke(); };
+            timer.Start();
+
             GoButton.IsEnabled = false;
             StopButton.IsEnabled = true;
-
-            timer = new Timer(150);
-            timer.Elapsed += (sender, e) => { client.Invoke(); }; 
-            timer.Start();
 
             client.Initialize();
 
