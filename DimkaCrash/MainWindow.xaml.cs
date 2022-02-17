@@ -14,6 +14,9 @@ using System.Timers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using DiscordRPC;
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
+using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -28,9 +31,30 @@ namespace DimkaCrash
         public DiscordRpcClient client;
         public Timer timer;
 
+        private AppWindow window;
+
         public MainWindow()
         {
             this.InitializeComponent();
+
+            window = GetAppWindowForCurrentWindow();
+            if (AppWindowTitleBar.IsCustomizationSupported())
+            {
+                var titleBar = window.TitleBar;
+                titleBar.ExtendsContentIntoTitleBar = true;
+                titleBar.ButtonBackgroundColor = Colors.Transparent;
+            }
+            else
+            {
+                AppTitleBar.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private AppWindow GetAppWindowForCurrentWindow()
+        {
+            IntPtr hWnd = WindowNative.GetWindowHandle(this);
+            WindowId wndId = Win32Interop.GetWindowIdFromWindow(hWnd);
+            return AppWindow.GetFromWindowId(wndId);
         }
 
         public void GoButton_Click(object sender, RoutedEventArgs eventArgs)
