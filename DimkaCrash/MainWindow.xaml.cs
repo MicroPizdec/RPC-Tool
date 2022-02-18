@@ -29,7 +29,6 @@ namespace DimkaCrash
     public sealed partial class MainWindow : Window
     {
         public DiscordRpcClient client;
-        public Timer timer;
 
         private AppWindow window;
 
@@ -97,16 +96,18 @@ namespace DimkaCrash
                 StopButton.IsEnabled = false;
             };
 
-            timer = new Timer(100);
-            timer.Elapsed += (sender, e) => { client.Invoke(); };
-            timer.Start();
-
             GoButton.IsEnabled = false;
             StopButton.IsEnabled = true;
 
             client.Initialize();
 
-            client.SetPresence(new RichPresence()
+            ulong startTimestamp = 0;
+            ulong endTimestamp = 0;
+
+            ulong.TryParse(StartTextBox.Text, out startTimestamp);
+            ulong.TryParse(EndTextBox.Text, out endTimestamp);
+
+            RichPresence presence = new RichPresence()
             {
                 Details = DetailsTextBox.Text,
                 State = StateTextBox.Text,
@@ -117,17 +118,22 @@ namespace DimkaCrash
                     SmallImageKey = SmallImageKeyTextBox.Text,
                     SmallImageText = SmallImageTextBox.Text
                 },
-                Timestamps = new Timestamps()
+            };
+
+            if (startTimestamp != 0 && endTimestamp != 0)
+            {
+                presence.Timestamps = new Timestamps()
                 {
-                    StartUnixMilliseconds = ulong.Parse(StartTextBox.Text),
-                    EndUnixMilliseconds = ulong.Parse(EndTextBox.Text)
-                }
-            });
+                    StartUnixMilliseconds = startTimestamp,
+                    EndUnixMilliseconds = endTimestamp
+                };
+            }
+
+            client.SetPresence(presence);
         }
 
         public void StopButton_Click(object sender, RoutedEventArgs e)
         {
-            timer.Stop();
             client.Dispose();
   
             StopSuccess.IsOpen = true;
