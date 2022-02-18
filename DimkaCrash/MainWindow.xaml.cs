@@ -73,11 +73,31 @@ namespace DimkaCrash
             return AppWindow.GetFromWindowId(wndId);
         }
 
+        public bool ValidateInput()
+        {
+            if (string.IsNullOrEmpty(ClientIDTextBox.Text) || 
+                string.IsNullOrEmpty(DetailsTextBox.Text) || 
+                string.IsNullOrEmpty(StateTextBox.Text))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public void GoButton_Click(object sender, RoutedEventArgs eventArgs)
         {
+            if (!ValidateInput())
+            {
+                NoInput.IsOpen = true;
+                return;
+            }
+
             client = new DiscordRpcClient(ClientIDTextBox.Text);
 
-            client.OnReady += (sender, e) =>
+            /* client.OnReady += (sender, e) =>
             {
                 StartSuccess.IsOpen = true;
             };
@@ -94,7 +114,7 @@ namespace DimkaCrash
                 StartFailed.IsOpen = true;
                 GoButton.IsEnabled = true;
                 StopButton.IsEnabled = false;
-            };
+            }; */
 
             GoButton.IsEnabled = false;
             StopButton.IsEnabled = true;
@@ -130,6 +150,8 @@ namespace DimkaCrash
             }
 
             client.SetPresence(presence);
+
+            StartSuccess.IsOpen = true;
         }
 
         public void StopButton_Click(object sender, RoutedEventArgs e)

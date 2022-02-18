@@ -126,7 +126,14 @@
                         <SymbolIconSource Symbol="Cancel" />
                     </TeachingTip.IconSource>
                 </TeachingTip>
-                
+
+                <TeachingTip x:Name="NoInput"
+                         Target="{x:Bind GoButton}"
+                         Title="Client ID, top text or bottom text are missing.">
+                    <TeachingTip.IconSource>
+                        <SymbolIconSource Symbol="Cancel" />
+                    </TeachingTip.IconSource>
+                </TeachingTip>
             </StackPanel>
         </ScrollViewer>
 
