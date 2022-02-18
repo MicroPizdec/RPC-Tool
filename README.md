@@ -3,4 +3,4 @@ Just an easy to use app that creates custom Discord rich presence.
 
 Bugs? Please file [an issue](https://github.com/MicroPizdec/RPC-Tool/issues/new), and maybe we'll fix it.
 
-Version: **v1.0.0 Developer Preview**
+Version: **v1.0.0 Developer Preview** ~~(and because WinUI 3 is raw)~~
