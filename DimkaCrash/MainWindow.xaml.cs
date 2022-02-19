@@ -160,6 +160,18 @@ namespace DimkaCrash
                 };
             }
 
+            if (!string.IsNullOrEmpty(ButtonTextBox.Text) && !string.IsNullOrEmpty(ButtonURLTextBox.Text))
+            {
+                presence.Buttons = new DiscordRPC.Button[]
+                {
+                    new DiscordRPC.Button()
+                    {
+                        Label = ButtonTextBox.Text,
+                        Url = ButtonURLTextBox.Text,
+                    }
+                };
+            }
+
             client.SetPresence(presence);
 
             StartSuccess.IsOpen = true;
