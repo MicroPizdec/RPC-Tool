@@ -200,13 +200,23 @@ namespace DimkaCrash
         public async void SaveButton_Click(object sender, RoutedEventArgs args)
         {
             FileSavePicker savePicker = new FileSavePicker();
-            savePicker.FileTypeChoices.Add("JSON config", new List<string>() { "json" });
+
+            IntPtr hwnd = WindowNative.GetWindowHandle(this);
+            InitializeWithWindow.Initialize(savePicker, hwnd);
+
+            savePicker.FileTypeChoices.Add("JSON config", new List<string>() { ".json" });
             savePicker.SuggestedFileName = "rpc-config";
 
             StorageFile file = await savePicker.PickSaveFileAsync();
             if (file != null)
             {
                 CachedFileManager.DeferUpdates(file);
+
+                ulong startTimestamp = 0;
+                ulong endTimestamp = 0;
+
+                ulong.TryParse(StartTextBox.Text, out startTimestamp);
+                ulong.TryParse(EndTextBox.Text, out endTimestamp);
 
                 JObject o = JObject.FromObject(new
                 {
@@ -225,6 +235,11 @@ namespace DimkaCrash
                         id = PartyIDTextBox.Text,
                         size = int.Parse(PartySizeTextBox.Text),
                         max = int.Parse(PartyMaxTextBox.Text)
+                    },
+                    timestamps = new
+                    {
+                        start = startTimestamp,
+                        end = endTimestamp
                     }
                 });
 
@@ -237,6 +252,7 @@ namespace DimkaCrash
                 }
 
                 await FileIO.WriteTextAsync(file, sb.ToString());
+                await CachedFileManager.CompleteUpdatesAsync(file);
             }
             else
             {
@@ -247,6 +263,10 @@ namespace DimkaCrash
         public async void OpenButton_Click(object sender, RoutedEventArgs args) 
         {
             FileOpenPicker picker = new FileOpenPicker();
+
+            IntPtr hwnd = WindowNative.GetWindowHandle(this);
+            InitializeWithWindow.Initialize(picker, hwnd);
+
             picker.ViewMode = PickerViewMode.List;
             picker.FileTypeFilter.Add(".json");
 
@@ -262,6 +282,15 @@ namespace DimkaCrash
                     ClientIDTextBox.Text = (string)o.SelectToken("clientID");
                     DetailsTextBox.Text = (string)o.SelectToken("details");
                     StateTextBox.Text = (string)o.SelectToken("state");
+                    StartTextBox.Text = (string)o.SelectToken("timestamps.start");
+                    EndTextBox.Text = (string)o.SelectToken("timestamps.end");
+                    LargeImageKeyTextBox.Text = (string)o.SelectToken("assets.largeImageKey");
+                    LargeImageTextBox.Text = (string)o.SelectToken("assets.largeImage");
+                    SmallImageKeyTextBox.Text = (string)o.SelectToken("assets.smallImageKey");
+                    SmallImageTextBox.Text = (string)o.SelectToken("assets.smallImageKey");
+                    PartyIDTextBox.Text = (string)o.SelectToken("party.id");
+                    PartySizeTextBox.Text = (string)o.SelectToken("party.size");
+                    PartyMaxTextBox.Text = (string)o.SelectToken("party.max");
                 }
                 catch
                 {

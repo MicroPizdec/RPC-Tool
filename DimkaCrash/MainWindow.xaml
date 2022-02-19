@@ -30,7 +30,7 @@
         
         <CommandBar Margin="0,32,0,0" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
             <AppBarButton x:Name="AddButton" Icon="Add" Label="New config" Click="AddButton_Click" />
-            <AppBarButton x:Name="SaveButton" Icon="Save" Label="Save config" Click="SaveButton_Click" IsEnabled="False" />
+            <AppBarButton x:Name="SaveButton" Icon="Save" Label="Save config" Click="SaveButton_Click" />
             <AppBarButton x:Name="OpenButton" Icon="OpenFile" Label="Open config" Click="OpenButton_Click" />
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="Setting" Label="Settings">
