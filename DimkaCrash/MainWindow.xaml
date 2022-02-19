@@ -96,10 +96,9 @@
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     Text="Garbage" />
-                    <TextBox Header="Party ID:" PlaceholderText="Any value" Margin="0,10,0,0" />
-                    <TextBox Header="Party size:" PlaceholderText="0 to disable" Margin="0,10,0,0" />
-                    <TextBox Header="Party max:" PlaceholderText="0 to disable" Margin="0,10,0,0" />
-                    <TextBox Header="Join secret:" PlaceholderText="Any value" Margin="0,10,0,0" />
+                    <TextBox x:Name="PartyIDTextBox" Header="Party ID:" PlaceholderText="Any value" Margin="0,10,0,0" />
+                    <TextBox x:Name="PartySizeTextBox" Header="Party size:" PlaceholderText="0 to disable" Margin="0,10,0,0" />
+                    <TextBox x:Name="PartyMaxTextBox" Header="Party max:" PlaceholderText="0 to disable" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <TeachingTip x:Name="StartSuccess"

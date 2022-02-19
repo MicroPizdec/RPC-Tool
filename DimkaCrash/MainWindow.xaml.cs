@@ -137,7 +137,7 @@ namespace DimkaCrash
                     LargeImageText = LargeImageTextBox.Text,
                     SmallImageKey = SmallImageKeyTextBox.Text,
                     SmallImageText = SmallImageTextBox.Text
-                },
+                }
             };
 
             if (startTimestamp != 0 && endTimestamp != 0)
@@ -146,6 +146,17 @@ namespace DimkaCrash
                 {
                     StartUnixMilliseconds = startTimestamp,
                     EndUnixMilliseconds = endTimestamp
+                };
+            }
+
+            if (!string.IsNullOrEmpty(PartyIDTextBox.Text) && !string.IsNullOrEmpty(PartySizeTextBox.Text) &&
+                !string.IsNullOrEmpty(PartyMaxTextBox.Text))
+            {
+                presence.Party = new Party()
+                {
+                    ID = PartyIDTextBox.Text,
+                    Size = int.Parse(PartySizeTextBox.Text),
+                    Max = int.Parse(PartyMaxTextBox.Text)
                 };
             }
 

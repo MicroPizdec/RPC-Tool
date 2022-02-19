@@ -8,11 +8,11 @@
 
   <Identity
     Name="fcdf0b1c-8aaf-488b-87b1-dfa7bd94ef04"
-    Publisher="CN=fishyrene"
+    Publisher="CN=MicroPizdec"
     Version="1.0.0.0" />
 
   <Properties>
-    <DisplayName>DimkaCrash</DisplayName>
+    <DisplayName>RPC-Tool</DisplayName>
     <PublisherDisplayName>fishyrene</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -42,6 +42,7 @@
           </uap:ShowNameOnTiles>
         </uap:DefaultTile >
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:LockScreen BadgeLogo="Assets\Square44x44Logo.png" Notification="badge"/>
       </uap:VisualElements>
     </Application>
   </Applications>
