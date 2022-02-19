@@ -11,12 +11,17 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Timers;
+using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using DiscordRPC;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using WinRT.Interop;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -31,7 +36,7 @@ namespace DimkaCrash
         public DiscordRpcClient client;
 
         private AppWindow window;
-
+        
         public MainWindow()
         {
             this.InitializeComponent();
@@ -87,7 +92,7 @@ namespace DimkaCrash
             }
         }
 
-        public void GoButton_Click(object sender, RoutedEventArgs eventArgs)
+        public void GoButton_Click(object sender, RoutedEventArgs args)
         {
             if (!ValidateInput())
             {
@@ -177,7 +182,7 @@ namespace DimkaCrash
             StartSuccess.IsOpen = true;
         }
 
-        public void StopButton_Click(object sender, RoutedEventArgs e)
+        public void StopButton_Click(object sender, RoutedEventArgs args)
         {
             client.Dispose();
   
@@ -185,6 +190,92 @@ namespace DimkaCrash
 
             GoButton.IsEnabled = true;
             StopButton.IsEnabled = false;
+        }
+
+        public void AddButton_Click(object sender, RoutedEventArgs args)
+        {
+            // idk
+        }
+
+        public async void SaveButton_Click(object sender, RoutedEventArgs args)
+        {
+            FileSavePicker savePicker = new FileSavePicker();
+            savePicker.FileTypeChoices.Add("JSON config", new List<string>() { "json" });
+            savePicker.SuggestedFileName = "rpc-config";
+
+            StorageFile file = await savePicker.PickSaveFileAsync();
+            if (file != null)
+            {
+                CachedFileManager.DeferUpdates(file);
+
+                JObject o = JObject.FromObject(new
+                {
+                    clientID = ClientIDTextBox.Text,
+                    details = DetailsTextBox.Text,
+                    state = StateTextBox.Text,
+                    assets = new
+                    {
+                        largeImageKey = LargeImageKeyTextBox.Text,
+                        largeImageText = LargeImageTextBox.Text,
+                        smallImageKey = SmallImageKeyTextBox.Text,
+                        smallImageText = SmallImageTextBox.Text
+                    },
+                    party = new
+                    {
+                        id = PartyIDTextBox.Text,
+                        size = int.Parse(PartySizeTextBox.Text),
+                        max = int.Parse(PartyMaxTextBox.Text)
+                    }
+                });
+
+                StringBuilder sb = new StringBuilder();
+                StringWriter sw = new StringWriter(sb);
+
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    o.WriteTo(writer);
+                }
+
+                await FileIO.WriteTextAsync(file, sb.ToString());
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        public async void OpenButton_Click(object sender, RoutedEventArgs args) 
+        {
+            FileOpenPicker picker = new FileOpenPicker();
+            picker.ViewMode = PickerViewMode.List;
+            picker.FileTypeFilter.Add(".json");
+
+            StorageFile file = await picker.PickSingleFileAsync();
+            if (file != null)
+            {
+                string json = await FileIO.ReadTextAsync(file);
+                JObject o;
+                try
+                {
+                    o = JObject.Parse(json);
+
+                    ClientIDTextBox.Text = (string)o.SelectToken("clientID");
+                    DetailsTextBox.Text = (string)o.SelectToken("details");
+                    StateTextBox.Text = (string)o.SelectToken("state");
+                }
+                catch
+                {
+                    ContentDialog dialog = new ContentDialog();
+                    dialog.Content = "Failed to load config.";
+                    dialog.PrimaryButtonText = "OK";
+
+                    await dialog.ShowAsync();
+                }
+            } 
+            else
+            {
+                return;
+            }
         }
     }
 }
