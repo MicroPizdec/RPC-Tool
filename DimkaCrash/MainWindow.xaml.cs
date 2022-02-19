@@ -292,11 +292,12 @@ namespace DimkaCrash
                     PartySizeTextBox.Text = (string)o.SelectToken("party.size");
                     PartyMaxTextBox.Text = (string)o.SelectToken("party.max");
                 }
-                catch
+                catch (JsonReaderException)
                 {
                     ContentDialog dialog = new ContentDialog();
                     dialog.Content = "Failed to load config.";
                     dialog.PrimaryButtonText = "OK";
+                    dialog.XamlRoot = Content.XamlRoot;
 
                     await dialog.ShowAsync();
                 }
