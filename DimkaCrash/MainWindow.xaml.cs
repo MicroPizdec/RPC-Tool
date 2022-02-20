@@ -285,9 +285,9 @@ namespace DimkaCrash
                     StartTextBox.Text = (string)o.SelectToken("timestamps.start");
                     EndTextBox.Text = (string)o.SelectToken("timestamps.end");
                     LargeImageKeyTextBox.Text = (string)o.SelectToken("assets.largeImageKey");
-                    LargeImageTextBox.Text = (string)o.SelectToken("assets.largeImage");
+                    LargeImageTextBox.Text = (string)o.SelectToken("assets.largeImageText");
                     SmallImageKeyTextBox.Text = (string)o.SelectToken("assets.smallImageKey");
-                    SmallImageTextBox.Text = (string)o.SelectToken("assets.smallImageKey");
+                    SmallImageTextBox.Text = (string)o.SelectToken("assets.smallImageText");
                     PartyIDTextBox.Text = (string)o.SelectToken("party.id");
                     PartySizeTextBox.Text = (string)o.SelectToken("party.size");
                     PartyMaxTextBox.Text = (string)o.SelectToken("party.max");
