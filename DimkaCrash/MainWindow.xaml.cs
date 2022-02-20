@@ -218,6 +218,12 @@ namespace DimkaCrash
                 ulong.TryParse(StartTextBox.Text, out startTimestamp);
                 ulong.TryParse(EndTextBox.Text, out endTimestamp);
 
+                int partySize = 0;
+                int partyMax = 0;
+
+                int.TryParse(PartySizeTextBox.Text, out partySize);
+                int.TryParse(PartyMaxTextBox.Text, out partyMax);
+
                 JObject o = JObject.FromObject(new
                 {
                     clientID = ClientIDTextBox.Text,
@@ -233,8 +239,8 @@ namespace DimkaCrash
                     party = new
                     {
                         id = PartyIDTextBox.Text,
-                        size = int.Parse(PartySizeTextBox.Text),
-                        max = int.Parse(PartyMaxTextBox.Text)
+                        size = partySize,
+                        max = partyMax
                     },
                     timestamps = new
                     {
