@@ -307,5 +307,20 @@ namespace DimkaCrash
                 return;
             }
         }
+
+        private async void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = "About RPC-Tool",
+                Content = new AboutContentDialogContent(),
+                PrimaryButtonText = "OK",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = Content.XamlRoot
+            };
+
+            await dialog.ShowAsync();
+        }
     }
 }

@@ -33,7 +33,7 @@
             <AppBarButton x:Name="SaveButton" Icon="Save" Label="Save config" Click="SaveButton_Click" />
             <AppBarButton x:Name="OpenButton" Icon="OpenFile" Label="Open config" Click="OpenButton_Click" />
             <CommandBar.SecondaryCommands>
-                <AppBarButton Icon="Setting" Label="Settings">
+                <AppBarButton x:Name="SettingsButton" Icon="Setting" Label="Settings" Click="SettingsButton_Click">
                     <AppBarButton.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="I" />
                     </AppBarButton.KeyboardAccelerators>
