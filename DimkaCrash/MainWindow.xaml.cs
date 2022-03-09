@@ -261,6 +261,11 @@ namespace DimkaCrash
                     {
                         b1text = ButtonTextBox.Text,
                         b1url = ButtonURLTextBox.Text
+                    },
+                    button2 = new
+                    {
+                        b2text = Button2TextBox.Text,
+                        b2url = Button2URLTextBox.Text
                     }
                 });
 
@@ -314,6 +319,8 @@ namespace DimkaCrash
                     PartyMaxTextBox.Text = (string)o.SelectToken("party.max");
                     ButtonTextBox.Text = (string)o.SelectToken("button1.b1text");
                     ButtonURLTextBox.Text = (string)o.SelectToken("button1.b1url");
+                    Button2TextBox.Text = (string)o.SelectToken("button2.b2text");
+                    Button2URLTextBox.Text = (string)o.SelectToken("button2.b2url");
                 }
                 catch (JsonReaderException)
                 {
