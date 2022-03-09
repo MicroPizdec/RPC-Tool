@@ -165,7 +165,7 @@ namespace DimkaCrash
                 };
             }
 
-            if (!string.IsNullOrEmpty(ButtonTextBox.Text) && !string.IsNullOrEmpty(ButtonURLTextBox.Text))
+            if (!string.IsNullOrEmpty(ButtonTextBox.Text) && !string.IsNullOrEmpty(ButtonURLTextBox.Text) && !string.IsNullOrEmpty(Button2TextBox.Text) && !string.IsNullOrEmpty(Button2URLTextBox.Text))
             {
                 presence.Buttons = new DiscordRPC.Button[]
                 {
@@ -173,6 +173,11 @@ namespace DimkaCrash
                     {
                         Label = ButtonTextBox.Text,
                         Url = ButtonURLTextBox.Text,
+                    },
+                    new DiscordRPC.Button()
+                    {
+                        Label = Button2TextBox.Text,
+                        Url = Button2URLTextBox.Text,
                     }
                 };
             }
