@@ -192,9 +192,19 @@ namespace DimkaCrash
             StopButton.IsEnabled = false;
         }
 
-        public void AddButton_Click(object sender, RoutedEventArgs args)
+        public async void AddButton_Click(object sender, RoutedEventArgs args)
         {
-            // idk
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = "Just don't...",
+                Content = "Leave me alone! (for now)",
+                PrimaryButtonText = "OK",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = Content.XamlRoot
+            };
+
+            await dialog.ShowAsync();
         }
 
         public async void SaveButton_Click(object sender, RoutedEventArgs args)
@@ -246,6 +256,11 @@ namespace DimkaCrash
                     {
                         start = startTimestamp,
                         end = endTimestamp
+                    },
+                    button1 = new
+                    {
+                        b1text = ButtonTextBox.Text,
+                        b1url = ButtonURLTextBox.Text
                     }
                 });
 
@@ -297,6 +312,8 @@ namespace DimkaCrash
                     PartyIDTextBox.Text = (string)o.SelectToken("party.id");
                     PartySizeTextBox.Text = (string)o.SelectToken("party.size");
                     PartyMaxTextBox.Text = (string)o.SelectToken("party.max");
+                    ButtonTextBox.Text = (string)o.SelectToken("button1.b1text");
+                    ButtonURLTextBox.Text = (string)o.SelectToken("button1.b1url");
                 }
                 catch (JsonReaderException)
                 {
