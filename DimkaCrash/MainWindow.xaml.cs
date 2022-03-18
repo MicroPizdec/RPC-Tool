@@ -33,9 +33,9 @@ namespace DimkaCrash
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        public DiscordRpcClient client;
-
+        private DiscordRpcClient client;
         private AppWindow window;
+        private StorageFile openedFile;
         
         public MainWindow()
         {
@@ -78,7 +78,7 @@ namespace DimkaCrash
             return AppWindow.GetFromWindowId(wndId);
         }
 
-        public bool ValidateInput()
+        private bool ValidateInput()
         {
             if (string.IsNullOrEmpty(ClientIDTextBox.Text) || 
                 string.IsNullOrEmpty(DetailsTextBox.Text) || 
@@ -92,7 +92,7 @@ namespace DimkaCrash
             }
         }
 
-        public void GoButton_Click(object sender, RoutedEventArgs args)
+        private void GoButton_Click(object sender, RoutedEventArgs args)
         {
             if (!ValidateInput())
             {
@@ -187,7 +187,7 @@ namespace DimkaCrash
             StartSuccess.IsOpen = true;
         }
 
-        public void StopButton_Click(object sender, RoutedEventArgs args)
+        private void StopButton_Click(object sender, RoutedEventArgs args)
         {
             client.Dispose();
   
@@ -197,7 +197,67 @@ namespace DimkaCrash
             StopButton.IsEnabled = false;
         }
 
-        public async void AddButton_Click(object sender, RoutedEventArgs args)
+        private string ToJson()
+        {
+            ulong startTimestamp = 0;
+            ulong endTimestamp = 0;
+
+            ulong.TryParse(StartTextBox.Text, out startTimestamp);
+            ulong.TryParse(EndTextBox.Text, out endTimestamp);
+
+            int partySize = 0;
+            int partyMax = 0;
+
+            int.TryParse(PartySizeTextBox.Text, out partySize);
+            int.TryParse(PartyMaxTextBox.Text, out partyMax);
+
+            JObject o = JObject.FromObject(new
+            {
+                clientID = ClientIDTextBox.Text,
+                details = DetailsTextBox.Text,
+                state = StateTextBox.Text,
+                assets = new
+                {
+                    largeImageKey = LargeImageKeyTextBox.Text,
+                    largeImageText = LargeImageTextBox.Text,
+                    smallImageKey = SmallImageKeyTextBox.Text,
+                    smallImageText = SmallImageTextBox.Text
+                },
+                party = new
+                {
+                    id = PartyIDTextBox.Text,
+                    size = partySize,
+                    max = partyMax
+                },
+                timestamps = new
+                {
+                    start = startTimestamp,
+                    end = endTimestamp
+                },
+                button1 = new
+                {
+                    b1text = ButtonTextBox.Text,
+                    b1url = ButtonURLTextBox.Text
+                },
+                button2 = new
+                {
+                    b2text = Button2TextBox.Text,
+                    b2url = Button2URLTextBox.Text
+                }
+            });
+
+            StringBuilder sb = new StringBuilder();
+            StringWriter sw = new StringWriter(sb);
+
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                o.WriteTo(writer);
+            }
+
+            return sb.ToString();
+        }
+
+        private async void NewButton_Click(object sender, RoutedEventArgs args)
         {
             ContentDialog dialog = new ContentDialog()
             {
@@ -212,7 +272,7 @@ namespace DimkaCrash
             await dialog.ShowAsync();
         }
 
-        public async void SaveButton_Click(object sender, RoutedEventArgs args)
+        private async void SaveAsButton_Click(object sender, RoutedEventArgs args)
         {
             FileSavePicker savePicker = new FileSavePicker();
 
@@ -222,76 +282,17 @@ namespace DimkaCrash
             savePicker.FileTypeChoices.Add("JSON config", new List<string>() { ".json" });
             savePicker.SuggestedFileName = "rpc-config";
 
-            StorageFile file = await savePicker.PickSaveFileAsync();
-            if (file != null)
+            openedFile = await savePicker.PickSaveFileAsync();
+            if (openedFile != null)
             {
-                CachedFileManager.DeferUpdates(file);
+                CachedFileManager.DeferUpdates(openedFile);
 
-                ulong startTimestamp = 0;
-                ulong endTimestamp = 0;
-
-                ulong.TryParse(StartTextBox.Text, out startTimestamp);
-                ulong.TryParse(EndTextBox.Text, out endTimestamp);
-
-                int partySize = 0;
-                int partyMax = 0;
-
-                int.TryParse(PartySizeTextBox.Text, out partySize);
-                int.TryParse(PartyMaxTextBox.Text, out partyMax);
-
-                JObject o = JObject.FromObject(new
-                {
-                    clientID = ClientIDTextBox.Text,
-                    details = DetailsTextBox.Text,
-                    state = StateTextBox.Text,
-                    assets = new
-                    {
-                        largeImageKey = LargeImageKeyTextBox.Text,
-                        largeImageText = LargeImageTextBox.Text,
-                        smallImageKey = SmallImageKeyTextBox.Text,
-                        smallImageText = SmallImageTextBox.Text
-                    },
-                    party = new
-                    {
-                        id = PartyIDTextBox.Text,
-                        size = partySize,
-                        max = partyMax
-                    },
-                    timestamps = new
-                    {
-                        start = startTimestamp,
-                        end = endTimestamp
-                    },
-                    button1 = new
-                    {
-                        b1text = ButtonTextBox.Text,
-                        b1url = ButtonURLTextBox.Text
-                    },
-                    button2 = new
-                    {
-                        b2text = Button2TextBox.Text,
-                        b2url = Button2URLTextBox.Text
-                    }
-                });
-
-                StringBuilder sb = new StringBuilder();
-                StringWriter sw = new StringWriter(sb);
-
-                using (JsonWriter writer = new JsonTextWriter(sw))
-                {
-                    o.WriteTo(writer);
-                }
-
-                await FileIO.WriteTextAsync(file, sb.ToString());
-                await CachedFileManager.CompleteUpdatesAsync(file);
-            }
-            else
-            {
-                return;
+                await FileIO.WriteTextAsync(openedFile, ToJson());
+                await CachedFileManager.CompleteUpdatesAsync(openedFile);
             }
         }
 
-        public async void OpenButton_Click(object sender, RoutedEventArgs args) 
+        private async void OpenButton_Click(object sender, RoutedEventArgs args) 
         {
             FileOpenPicker picker = new FileOpenPicker();
 
@@ -301,10 +302,10 @@ namespace DimkaCrash
             picker.ViewMode = PickerViewMode.List;
             picker.FileTypeFilter.Add(".json");
 
-            StorageFile file = await picker.PickSingleFileAsync();
-            if (file != null)
+            openedFile = await picker.PickSingleFileAsync();
+            if (openedFile != null)
             {
-                string json = await FileIO.ReadTextAsync(file);
+                string json = await FileIO.ReadTextAsync(openedFile);
                 JObject o;
                 try
                 {
@@ -336,14 +337,10 @@ namespace DimkaCrash
 
                     await dialog.ShowAsync();
                 }
-            } 
-            else
-            {
-                return;
             }
         }
 
-        private async void SettingsButton_Click(object sender, RoutedEventArgs e)
+        private async void AboutButton_Click(object sender, RoutedEventArgs e)
         {
             ContentDialog dialog = new ContentDialog()
             {
@@ -356,6 +353,24 @@ namespace DimkaCrash
             };
 
             await dialog.ShowAsync();
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Exit();
+        }
+
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (openedFile == null)
+            {
+                SaveAsButton_Click(sender, e);
+                return;
+            }
+
+            CachedFileManager.DeferUpdates(openedFile);
+            await FileIO.WriteTextAsync(openedFile, ToJson());
+            await CachedFileManager.CompleteUpdatesAsync(openedFile);
         }
     }
 }

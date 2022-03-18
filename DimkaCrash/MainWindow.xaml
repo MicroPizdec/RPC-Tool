@@ -27,19 +27,20 @@
                VerticalAlignment="Center"
                Margin="48,0,0,0"/>
         </Grid>
-        
-        <CommandBar Margin="0,32,0,0" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-            <AppBarButton x:Name="AddButton" Icon="Add" Label="New config" Click="AddButton_Click" />
-            <AppBarButton x:Name="SaveButton" Icon="Save" Label="Save config" Click="SaveButton_Click" />
-            <AppBarButton x:Name="OpenButton" Icon="OpenFile" Label="Open config" Click="OpenButton_Click" />
-            <CommandBar.SecondaryCommands>
-                <AppBarButton x:Name="SettingsButton" Icon="Setting" Label="Settings" Click="SettingsButton_Click">
-                    <AppBarButton.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="I" />
-                    </AppBarButton.KeyboardAccelerators>
-                </AppBarButton>
-            </CommandBar.SecondaryCommands>
-        </CommandBar>
+
+        <muxc:MenuBar VerticalAlignment="Top" Margin="0,32,0,0">
+            <muxc:MenuBarItem Title="File">
+                <muxc:MenuFlyoutItem x:Name="NewButton" Text="New" Click="NewButton_Click"/>
+                <muxc:MenuFlyoutItem x:Name="OpenButton" Text="Open" Click="OpenButton_Click"/>
+                <muxc:MenuFlyoutItem x:Name="SaveButton" Text="Save" Click="SaveButton_Click"/>
+                <muxc:MenuFlyoutItem x:Name="SaveAsButton" Text="Save as" Click="SaveAsButton_Click"/>
+                <muxc:MenuFlyoutItem x:Name="ExitButton" Text="Exit" Click="ExitButton_Click"/>
+            </muxc:MenuBarItem>
+
+            <muxc:MenuBarItem Title="Help">
+                <muxc:MenuFlyoutItem x:Name="AboutButton" Text="About" Click="AboutButton_Click"/>
+            </muxc:MenuBarItem>
+        </muxc:MenuBar>
 
         <ScrollViewer
             x:Name="contentSV"
@@ -49,7 +50,7 @@
             UseSystemFocusVisuals="False"
             VerticalScrollBarVisibility="Auto"
             VerticalScrollMode="Auto"
-            Margin="0,82,0,60">
+            Margin="0,72,0,60">
             <StackPanel HorizontalAlignment="Stretch">
                 <StackPanel>
                     <TextBox x:Name="ClientIDTextBox" Header="Enter ID of app:" PlaceholderText="ClientID" Margin="0,10,0,0" />
