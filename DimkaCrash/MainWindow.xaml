@@ -158,9 +158,5 @@
             <Button x:Name="GoButton" Style="{StaticResource AccentButtonStyle}" Content="Start" Click="GoButton_Click" />
             <Button x:Name="StopButton" Content="Stop" IsEnabled="False" Margin="10,0,0,0" Click="StopButton_Click" />
         </StackPanel>
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <TextBlock>WIP, PRODUCT NOT FINAL</TextBlock>
-        </StackPanel>
     </Grid>
 </Window> 
