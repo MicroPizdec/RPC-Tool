@@ -29,16 +29,16 @@
         </Grid>
 
         <muxc:MenuBar VerticalAlignment="Top" Margin="0,32,0,0">
-            <muxc:MenuBarItem Title="File">
-                <muxc:MenuFlyoutItem x:Name="NewButton" Text="New" Click="NewButton_Click"/>
-                <muxc:MenuFlyoutItem x:Name="OpenButton" Text="Open" Click="OpenButton_Click"/>
-                <muxc:MenuFlyoutItem x:Name="SaveButton" Text="Save" Click="SaveButton_Click"/>
-                <muxc:MenuFlyoutItem x:Name="SaveAsButton" Text="Save as" Click="SaveAsButton_Click"/>
-                <muxc:MenuFlyoutItem x:Name="ExitButton" Text="Exit" Click="ExitButton_Click"/>
+            <muxc:MenuBarItem x:Uid="File">
+                <muxc:MenuFlyoutItem x:Name="NewButton" x:Uid="New" Click="NewButton_Click"/>
+                <muxc:MenuFlyoutItem x:Name="OpenButton" x:Uid="Open" Click="OpenButton_Click"/>
+                <muxc:MenuFlyoutItem x:Name="SaveButton" x:Uid="Save" Click="SaveButton_Click"/>
+                <muxc:MenuFlyoutItem x:Name="SaveAsButton" x:Uid="SaveAs" Click="SaveAsButton_Click"/>
+                <muxc:MenuFlyoutItem x:Name="ExitButton" x:Uid="Exit" Click="ExitButton_Click"/>
             </muxc:MenuBarItem>
 
-            <muxc:MenuBarItem Title="Help">
-                <muxc:MenuFlyoutItem x:Name="AboutButton" Text="About" Click="AboutButton_Click"/>
+            <muxc:MenuBarItem x:Uid="Help">
+                <muxc:MenuFlyoutItem x:Name="AboutButton" x:Uid="About" Click="AboutButton_Click"/>
             </muxc:MenuBarItem>
         </muxc:MenuBar>
 
@@ -53,76 +53,76 @@
             Margin="0,72,0,60">
             <StackPanel HorizontalAlignment="Stretch">
                 <StackPanel>
-                    <TextBox x:Name="ClientIDTextBox" Header="Enter ID of app:" PlaceholderText="ClientID" Margin="0,10,0,0" />
+                    <TextBox x:Name="ClientIDTextBox" x:Uid="ClientID" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <StackPanel>
                     <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Text" />
-                    <TextBox x:Name="DetailsTextBox" Header="Top text:" PlaceholderText="Details" Margin="0,10,0,0" />
-                    <TextBox x:Name="StateTextBox" Header="Bottom text:" PlaceholderText="State" Margin="0,10,0,0" />
+                    x:Uid="Text" />
+                    <TextBox x:Name="DetailsTextBox" x:Uid="Details" Margin="0,10,0,0" />
+                    <TextBox x:Name="StateTextBox" x:Uid="State" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <StackPanel>
                     <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Timestamp" />
-                    <TextBox x:Name="StartTextBox" Header="Start:" PlaceholderText="Start timestamp in milliseconds" Margin="0,10,0,0" />
-                    <TextBox x:Name="EndTextBox" Header="End:" PlaceholderText="End timestamp in milliseconds" Margin="0,10,0,0" />
+                    x:Uid="Timestamp" />
+                    <TextBox x:Name="StartTextBox" x:Uid="Start" Margin="0,10,0,0" />
+                    <TextBox x:Name="EndTextBox" x:Uid="End" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <StackPanel>
                     <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Large image" />
-                    <TextBox x:Name="LargeImageKeyTextBox" Header="Key:" PlaceholderText="Details" Margin="0,10,0,0" />
-                    <TextBox x:Name="LargeImageTextBox" Header="Text:" PlaceholderText="Text of large image when you hover over it" Margin="0,10,0,0" />
+                    x:Uid="LargeImage" />
+                    <TextBox x:Name="LargeImageKeyTextBox" x:Uid="LargeImageKey" Margin="0,10,0,0" />
+                    <TextBox x:Name="LargeImageTextBox" x:Uid="LargeImageText" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <StackPanel>
                     <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Small image" />
-                    <TextBox x:Name="SmallImageKeyTextBox" Header="Key:" PlaceholderText="Pretty self-explanatory" Margin="0,10,0,0" />
-                    <TextBox x:Name="SmallImageTextBox" Header="Text:" PlaceholderText="Pretty self-explanatory too" Margin="0,10,0,0" />
+                    x:Uid="SmallImage" />
+                    <TextBox x:Name="SmallImageKeyTextBox" x:Uid="SmallImageKey" Margin="0,10,0,0" />
+                    <TextBox x:Name="SmallImageTextBox" x:Uid="SmallImageText" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <StackPanel>
                     <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Garbage" />
-                    <TextBox x:Name="PartyIDTextBox" Header="Party ID:" PlaceholderText="Any value" Margin="0,10,0,0" />
-                    <TextBox x:Name="PartySizeTextBox" Header="Party size:" PlaceholderText="Optional" Margin="0,10,0,0" />
-                    <TextBox x:Name="PartyMaxTextBox" Header="Party max:" PlaceholderText="Optional" Margin="0,10,0,0" />
+                    x:Uid="Party" />
+                    <TextBox x:Name="PartyIDTextBox" x:Uid="PartyID" Margin="0,10,0,0" />
+                    <TextBox x:Name="PartySizeTextBox" x:Uid="PartySize" Margin="0,10,0,0" />
+                    <TextBox x:Name="PartyMaxTextBox" x:Uid="PartyMax" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <StackPanel>
                     <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Button" />
-                    <TextBox x:Name="ButtonTextBox" Header="Button text:" PlaceholderText="There's nothing to say ¯\_(ツ)_/¯" Margin="0,10,0,0" />
-                    <TextBox x:Name="ButtonURLTextBox" Header="URL:" PlaceholderText="/shrug" Margin="0,10,0,0" />
+                    x:Uid="Button" />
+                    <TextBox x:Name="ButtonTextBox" x:Uid="ButtonText" Margin="0,10,0,0" />
+                    <TextBox x:Name="ButtonURLTextBox" x:Uid="ButtonURL" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <StackPanel>
                     <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,40,0,0"
-                    Text="Second button" />
-                    <TextBox x:Name="Button2TextBox" Header="Button text:" PlaceholderText="Text" Margin="0,10,0,0" />
-                    <TextBox x:Name="Button2URLTextBox" Header="URL:" PlaceholderText="/shrug" Margin="0,10,0,0" />
+                    x:Uid="SecondButton" />
+                    <TextBox x:Name="Button2TextBox" x:Uid="ButtonText" Margin="0,10,0,0" />
+                    <TextBox x:Name="Button2URLTextBox" x:Uid="ButtonURL" Margin="0,10,0,0" />
                 </StackPanel>
 
                 <TeachingTip x:Name="StartSuccess"
 	                    Target="{x:Bind GoButton}"
-	                    Title="Your RPC started successfully!">
+	                    x:Uid="StartSuccess">
                     <TeachingTip.IconSource>
                         <SymbolIconSource Symbol="Accept" />
                     </TeachingTip.IconSource>
@@ -130,7 +130,7 @@
                 
                 <TeachingTip x:Name="StopSuccess"
 	                    Target="{x:Bind StopButton}"
-	                    Title="Your RPC stopped successfully">
+	                    x:Uid="StopSuccess">
                     <TeachingTip.IconSource>
                         <SymbolIconSource Symbol="Pause" />
                     </TeachingTip.IconSource>
@@ -138,8 +138,7 @@
 
                 <TeachingTip x:Name="StartFailed"
 	                    Target="{x:Bind GoButton}"
-	                    Title="Failed to start your RPC"
-                        Subtitle="Did you exactly provide correct ClientID?">
+                        x:Uid="StartFailed">
                     <TeachingTip.IconSource>
                         <SymbolIconSource Symbol="Cancel" />
                     </TeachingTip.IconSource>
@@ -147,17 +146,24 @@
 
                 <TeachingTip x:Name="NoInput"
                          Target="{x:Bind GoButton}"
-                         Title="Client ID, top text or bottom text are missing.">
+                         x:Uid="NoInput">
                     <TeachingTip.IconSource>
                         <SymbolIconSource Symbol="Cancel" />
+                    </TeachingTip.IconSource>
+                </TeachingTip>
+
+                <TeachingTip x:Name="SaveSuccess"
+                         x:Uid="SaveSuccess">
+                    <TeachingTip.IconSource>
+                        <SymbolIconSource Symbol="Save" />
                     </TeachingTip.IconSource>
                 </TeachingTip>
             </StackPanel>
         </ScrollViewer>
 
         <StackPanel Orientation="Horizontal" Margin="48,0,0,15" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <Button x:Name="GoButton" Style="{StaticResource AccentButtonStyle}" Content="Start" Click="GoButton_Click" />
-            <Button x:Name="StopButton" Content="Stop" IsEnabled="False" Margin="10,0,0,0" Click="StopButton_Click" />
+            <Button x:Name="GoButton" Style="{StaticResource AccentButtonStyle}" x:Uid="Go" Click="GoButton_Click" />
+            <Button x:Name="StopButton" x:Uid="Stop" IsEnabled="False" Margin="10,0,0,0" Click="StopButton_Click" />
         </StackPanel>
     </Grid>
 </Window> 

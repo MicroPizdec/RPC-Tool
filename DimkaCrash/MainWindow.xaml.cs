@@ -1,27 +1,19 @@
-﻿using Microsoft.UI.Xaml;
+﻿using DiscordRPC;
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Timers;
 using System.Text;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using DiscordRPC;
-using Microsoft.UI;
-using Microsoft.UI.Windowing;
-using WinRT.Interop;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -36,7 +28,7 @@ namespace DimkaCrash
         private DiscordRpcClient client;
         private AppWindow window;
         private StorageFile openedFile;
-        
+
         public MainWindow()
         {
             this.InitializeComponent();
@@ -80,8 +72,8 @@ namespace DimkaCrash
 
         private bool ValidateInput()
         {
-            if (string.IsNullOrEmpty(ClientIDTextBox.Text) || 
-                string.IsNullOrEmpty(DetailsTextBox.Text) || 
+            if (string.IsNullOrEmpty(ClientIDTextBox.Text) ||
+                string.IsNullOrEmpty(DetailsTextBox.Text) ||
                 string.IsNullOrEmpty(StateTextBox.Text))
             {
                 return false;
@@ -165,7 +157,8 @@ namespace DimkaCrash
                 };
             }
 
-            if (!string.IsNullOrEmpty(ButtonTextBox.Text) && !string.IsNullOrEmpty(ButtonURLTextBox.Text) && !string.IsNullOrEmpty(Button2TextBox.Text) && !string.IsNullOrEmpty(Button2URLTextBox.Text))
+            if (!string.IsNullOrEmpty(ButtonTextBox.Text) && !string.IsNullOrEmpty(ButtonURLTextBox.Text) &&
+                !string.IsNullOrEmpty(Button2TextBox.Text) && !string.IsNullOrEmpty(Button2URLTextBox.Text))
             {
                 presence.Buttons = new DiscordRPC.Button[]
                 {
@@ -190,7 +183,7 @@ namespace DimkaCrash
         private void StopButton_Click(object sender, RoutedEventArgs args)
         {
             client.Dispose();
-  
+
             StopSuccess.IsOpen = true;
 
             GoButton.IsEnabled = true;
@@ -289,10 +282,13 @@ namespace DimkaCrash
 
                 await FileIO.WriteTextAsync(openedFile, ToJson());
                 await CachedFileManager.CompleteUpdatesAsync(openedFile);
+
+                SaveSuccess.IsOpen = true;
+                TitleTextBlock.Text = openedFile.DisplayName + " - RPC-Tool";
             }
         }
 
-        private async void OpenButton_Click(object sender, RoutedEventArgs args) 
+        private async void OpenButton_Click(object sender, RoutedEventArgs args)
         {
             FileOpenPicker picker = new FileOpenPicker();
 
@@ -327,6 +323,8 @@ namespace DimkaCrash
                     ButtonURLTextBox.Text = (string)o.SelectToken("button1.b1url");
                     Button2TextBox.Text = (string)o.SelectToken("button2.b2text");
                     Button2URLTextBox.Text = (string)o.SelectToken("button2.b2url");
+
+                    TitleTextBlock.Text = openedFile.DisplayName + " - RPC-Tool";
                 }
                 catch (JsonReaderException)
                 {
@@ -342,9 +340,11 @@ namespace DimkaCrash
 
         private async void AboutButton_Click(object sender, RoutedEventArgs e)
         {
+            ResourceLoader resourceLoader = ResourceLoader.GetForViewIndependentUse();
+
             ContentDialog dialog = new ContentDialog()
             {
-                Title = "About RPC-Tool",
+                Title = resourceLoader.GetString("AboutTitle"),
                 Content = new AboutContentDialogContent(),
                 PrimaryButtonText = "OK",
                 CloseButtonText = "Cancel",
@@ -371,6 +371,8 @@ namespace DimkaCrash
             CachedFileManager.DeferUpdates(openedFile);
             await FileIO.WriteTextAsync(openedFile, ToJson());
             await CachedFileManager.CompleteUpdatesAsync(openedFile);
+
+            SaveSuccess.IsOpen = true;
         }
     }
 }

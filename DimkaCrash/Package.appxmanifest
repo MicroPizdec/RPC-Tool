@@ -9,7 +9,7 @@
   <Identity
     Name="fcdf0b1c-8aaf-488b-87b1-dfa7bd94ef04"
     Publisher="CN=MicroPizdec"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
   <Properties>
     <DisplayName>RPC-Tool</DisplayName>
