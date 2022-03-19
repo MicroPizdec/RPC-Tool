@@ -30,15 +30,39 @@
 
         <muxc:MenuBar VerticalAlignment="Top" Margin="0,32,0,0">
             <muxc:MenuBarItem x:Uid="File">
-                <muxc:MenuFlyoutItem x:Name="NewButton" x:Uid="New" Click="NewButton_Click"/>
-                <muxc:MenuFlyoutItem x:Name="OpenButton" x:Uid="Open" Click="OpenButton_Click"/>
-                <muxc:MenuFlyoutItem x:Name="SaveButton" x:Uid="Save" Click="SaveButton_Click"/>
-                <muxc:MenuFlyoutItem x:Name="SaveAsButton" x:Uid="SaveAs" Click="SaveAsButton_Click"/>
-                <muxc:MenuFlyoutItem x:Name="ExitButton" x:Uid="Exit" Click="ExitButton_Click"/>
+                <muxc:MenuFlyoutItem x:Name="NewButton" x:Uid="New" Click="NewButton_Click">
+                    <muxc:MenuFlyoutItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="N" />
+                    </muxc:MenuFlyoutItem.KeyboardAccelerators>
+                </muxc:MenuFlyoutItem>
+                <muxc:MenuFlyoutItem x:Name="OpenButton" x:Uid="Open" Click="OpenButton_Click">
+                    <muxc:MenuFlyoutItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="O" />
+                    </muxc:MenuFlyoutItem.KeyboardAccelerators>
+                </muxc:MenuFlyoutItem>
+                <muxc:MenuFlyoutItem x:Name="SaveButton" x:Uid="Save" Click="SaveButton_Click">
+                    <muxc:MenuFlyoutItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="S" />
+                    </muxc:MenuFlyoutItem.KeyboardAccelerators>
+                </muxc:MenuFlyoutItem>
+                <muxc:MenuFlyoutItem x:Name="SaveAsButton" x:Uid="SaveAs" Click="SaveAsButton_Click">
+                    <muxc:MenuFlyoutItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control,Shift" Key="S" />
+                    </muxc:MenuFlyoutItem.KeyboardAccelerators>
+                </muxc:MenuFlyoutItem>
+                <muxc:MenuFlyoutItem x:Name="ExitButton" x:Uid="Exit" Click="ExitButton_Click">
+                    <muxc:MenuFlyoutItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="E" />
+                    </muxc:MenuFlyoutItem.KeyboardAccelerators>
+                </muxc:MenuFlyoutItem>
             </muxc:MenuBarItem>
 
             <muxc:MenuBarItem x:Uid="Help">
-                <muxc:MenuFlyoutItem x:Name="AboutButton" x:Uid="About" Click="AboutButton_Click"/>
+                <muxc:MenuFlyoutItem x:Name="AboutButton" x:Uid="About" Click="AboutButton_Click">
+                    <muxc:MenuFlyoutItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="I" />
+                    </muxc:MenuFlyoutItem.KeyboardAccelerators>
+                </muxc:MenuFlyoutItem>
             </muxc:MenuBarItem>
         </muxc:MenuBar>
 
