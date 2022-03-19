@@ -60,8 +60,9 @@
 
   <ItemGroup>
     <PackageReference Include="DiscordRichPresence" Version="1.0.175" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 

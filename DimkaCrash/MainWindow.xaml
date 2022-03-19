@@ -50,6 +50,7 @@
                         <KeyboardAccelerator Modifiers="Control,Shift" Key="S" />
                     </muxc:MenuFlyoutItem.KeyboardAccelerators>
                 </muxc:MenuFlyoutItem>
+                <muxc:MenuFlyoutSeparator />
                 <muxc:MenuFlyoutItem x:Name="ExitButton" x:Uid="Exit" Click="ExitButton_Click">
                     <muxc:MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="E" />
