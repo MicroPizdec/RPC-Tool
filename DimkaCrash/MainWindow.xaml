@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Grid x:Name="AppTitleBar" Height="32" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+        <Grid x:Name="AppTitleBar" Height="32" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
                 <ColumnDefinition/>

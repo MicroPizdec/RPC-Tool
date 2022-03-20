@@ -39,12 +39,13 @@ namespace DimkaCrash
                 var titleBar = window.TitleBar;
                 titleBar.ExtendsContentIntoTitleBar = true;
                 titleBar.ButtonBackgroundColor = Colors.Transparent;
-                SetTitleBar(AppTitleBar);
             }
             else
             {
-                AppTitleBar.Visibility = Visibility.Collapsed;
+                ExtendsContentIntoTitleBar = true;
             }
+
+            SetTitleBar(AppTitleBar);
 
             Activated += MainWindow_Activated;
         }
