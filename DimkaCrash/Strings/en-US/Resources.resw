@@ -150,6 +150,9 @@
   <data name="ClientID.PlaceholderText" xml:space="preserve">
     <value>ClientID</value>
   </data>
+  <data name="ConfigLoadFail" xml:space="preserve">
+    <value>Failed to load config.</value>
+  </data>
   <data name="Details.Header" xml:space="preserve">
     <value>Top text:</value>
   </data>

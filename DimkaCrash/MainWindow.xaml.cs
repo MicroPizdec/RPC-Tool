@@ -28,6 +28,7 @@ namespace DimkaCrash
         private DiscordRpcClient client;
         private AppWindow window;
         private StorageFile openedFile;
+        private ResourceLoader resourceLoader;
 
         public MainWindow()
         {
@@ -48,6 +49,7 @@ namespace DimkaCrash
             SetTitleBar(AppTitleBar);
 
             Activated += MainWindow_Activated;
+            resourceLoader = ResourceLoader.GetForViewIndependentUse();
         }
 
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
@@ -329,10 +331,13 @@ namespace DimkaCrash
                 }
                 catch (JsonReaderException)
                 {
-                    ContentDialog dialog = new ContentDialog();
-                    dialog.Content = "Failed to load config.";
-                    dialog.PrimaryButtonText = "OK";
-                    dialog.XamlRoot = Content.XamlRoot;
+                    ContentDialog dialog = new ContentDialog()
+                    {
+                        Title = resourceLoader.GetString("ConfigLoadFail"),
+                        CloseButtonText = "OK",
+                        DefaultButton = ContentDialogButton.Close,
+                        XamlRoot = Content.XamlRoot
+                    };
 
                     await dialog.ShowAsync();
                 }
@@ -341,14 +346,11 @@ namespace DimkaCrash
 
         private async void AboutButton_Click(object sender, RoutedEventArgs e)
         {
-            ResourceLoader resourceLoader = ResourceLoader.GetForViewIndependentUse();
-
             ContentDialog dialog = new ContentDialog()
             {
                 Title = resourceLoader.GetString("AboutTitle"),
                 Content = new AboutContentDialogContent(),
                 PrimaryButtonText = "OK",
-                CloseButtonText = "Cancel",
                 DefaultButton = ContentDialogButton.Primary,
                 XamlRoot = Content.XamlRoot
             };

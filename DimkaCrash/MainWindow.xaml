@@ -34,27 +34,44 @@
                     <muxc:MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="N" />
                     </muxc:MenuFlyoutItem.KeyboardAccelerators>
+                    <muxc:MenuFlyoutItem.Icon>
+                        <muxc:SymbolIcon Symbol="Add" />
+                    </muxc:MenuFlyoutItem.Icon>
                 </muxc:MenuFlyoutItem>
+                
                 <muxc:MenuFlyoutItem x:Name="OpenButton" x:Uid="Open" Click="OpenButton_Click">
                     <muxc:MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="O" />
                     </muxc:MenuFlyoutItem.KeyboardAccelerators>
+                    <muxc:MenuFlyoutItem.Icon>
+                        <muxc:SymbolIcon Symbol="OpenFile" />
+                    </muxc:MenuFlyoutItem.Icon>
                 </muxc:MenuFlyoutItem>
+                
                 <muxc:MenuFlyoutItem x:Name="SaveButton" x:Uid="Save" Click="SaveButton_Click">
                     <muxc:MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="S" />
                     </muxc:MenuFlyoutItem.KeyboardAccelerators>
+                    <muxc:MenuFlyoutItem.Icon>
+                        <muxc:SymbolIcon Symbol="Save" />
+                    </muxc:MenuFlyoutItem.Icon>
                 </muxc:MenuFlyoutItem>
+                
                 <muxc:MenuFlyoutItem x:Name="SaveAsButton" x:Uid="SaveAs" Click="SaveAsButton_Click">
                     <muxc:MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control,Shift" Key="S" />
                     </muxc:MenuFlyoutItem.KeyboardAccelerators>
                 </muxc:MenuFlyoutItem>
+                
                 <muxc:MenuFlyoutSeparator />
+                
                 <muxc:MenuFlyoutItem x:Name="ExitButton" x:Uid="Exit" Click="ExitButton_Click">
                     <muxc:MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="E" />
                     </muxc:MenuFlyoutItem.KeyboardAccelerators>
+                    <muxc:MenuFlyoutItem.Icon>
+                        <muxc:SymbolIcon Symbol="Cancel" />
+                    </muxc:MenuFlyoutItem.Icon>
                 </muxc:MenuFlyoutItem>
             </muxc:MenuBarItem>
 
@@ -63,6 +80,9 @@
                     <muxc:MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="I" />
                     </muxc:MenuFlyoutItem.KeyboardAccelerators>
+                    <muxc:MenuFlyoutItem.Icon>
+                        <muxc:SymbolIcon Symbol="Help" />
+                    </muxc:MenuFlyoutItem.Icon>
                 </muxc:MenuFlyoutItem>
             </muxc:MenuBarItem>
         </muxc:MenuBar>

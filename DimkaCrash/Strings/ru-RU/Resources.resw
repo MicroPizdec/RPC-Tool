@@ -124,7 +124,8 @@
     <value>Разработано MicroPizdec с ❤️</value>
   </data>
   <data name="AboutText.Text" xml:space="preserve">
-    <value>RPC-Tool - простое в использовании приложение для создания своего Discord Rich Presence.</value>
+    <value>RPC-Tool - простое в использовании приложение для создания
+своего Discord Rich Presence.</value>
   </data>
   <data name="AboutTitle" xml:space="preserve">
     <value>О RPC-Tool</value>
@@ -149,6 +150,9 @@
   </data>
   <data name="ClientID.PlaceholderText" xml:space="preserve">
     <value>ClientID</value>
+  </data>
+  <data name="ConfigLoadFail" xml:space="preserve">
+    <value>Не удалось загрузить конфигурационный файл.</value>
   </data>
   <data name="Details.Header" xml:space="preserve">
     <value>Верхний текст:</value>
