@@ -15,9 +15,6 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using WinRT.Interop;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace DimkaCrash
 {
     /// <summary>
@@ -160,8 +157,19 @@ namespace DimkaCrash
                 };
             }
 
-            if (!string.IsNullOrEmpty(ButtonTextBox.Text) && !string.IsNullOrEmpty(ButtonURLTextBox.Text) &&
-                !string.IsNullOrEmpty(Button2TextBox.Text) && !string.IsNullOrEmpty(Button2URLTextBox.Text))
+            if (!string.IsNullOrEmpty(ButtonTextBox.Text) && !string.IsNullOrEmpty(ButtonURLTextBox.Text))
+            {
+                presence.Buttons = new DiscordRPC.Button[]
+                {
+                    new DiscordRPC.Button()
+                    {
+                        Label = ButtonTextBox.Text,
+                        Url = ButtonURLTextBox.Text,
+                    }
+                };
+            }
+
+            if (!string.IsNullOrEmpty(Button2TextBox.Text) && !string.IsNullOrEmpty(Button2URLTextBox.Text))
             {
                 presence.Buttons = new DiscordRPC.Button[]
                 {
@@ -174,7 +182,7 @@ namespace DimkaCrash
                     {
                         Label = Button2TextBox.Text,
                         Url = Button2URLTextBox.Text,
-                    }
+                    },
                 };
             }
 
@@ -282,7 +290,6 @@ namespace DimkaCrash
             if (openedFile != null)
             {
                 CachedFileManager.DeferUpdates(openedFile);
-
                 await FileIO.WriteTextAsync(openedFile, ToJson());
                 await CachedFileManager.CompleteUpdatesAsync(openedFile);
 
