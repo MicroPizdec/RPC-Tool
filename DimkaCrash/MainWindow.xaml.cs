@@ -13,6 +13,7 @@ using System.Text;
 using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using WinRT;
 using WinRT.Interop;
 
 namespace DimkaCrash
@@ -26,6 +27,9 @@ namespace DimkaCrash
         private AppWindow window;
         private StorageFile openedFile;
         private ResourceLoader resourceLoader;
+        private DispatcherQueueHelper dqHelper;
+        private Microsoft.UI.Composition.SystemBackdrops.MicaController micaController;
+        private Microsoft.UI.Composition.SystemBackdrops.SystemBackdropConfiguration configSource;
 
         public MainWindow()
         {
@@ -47,6 +51,74 @@ namespace DimkaCrash
 
             Activated += MainWindow_Activated;
             resourceLoader = ResourceLoader.GetForViewIndependentUse();
+
+            TrySetMicaBackdrop();
+        }
+
+        bool TrySetMicaBackdrop()
+        {
+            if (Microsoft.UI.Composition.SystemBackdrops.MicaController.IsSupported())
+            {
+                dqHelper = new DispatcherQueueHelper();
+                dqHelper.EnsureWindowsSystemDispatcherQueueController();
+
+                // Hooking up the policy object
+                configSource = new Microsoft.UI.Composition.SystemBackdrops.SystemBackdropConfiguration();
+                this.Activated += Window_Activated;
+                this.Closed += Window_Closed;
+                ((FrameworkElement)this.Content).ActualThemeChanged += Window_ThemeChanged;
+
+                // Initial configuration state.
+                configSource.IsInputActive = true;
+                SetConfigurationSourceTheme();
+
+                micaController = new Microsoft.UI.Composition.SystemBackdrops.MicaController();
+
+                // Enable the system backdrop.
+                // Note: Be sure to have "using WinRT;" to support the Window.As<...>() call.
+                micaController.AddSystemBackdropTarget(this.As<Microsoft.UI.Composition.ICompositionSupportsSystemBackdrop>());
+                micaController.SetSystemBackdropConfiguration(configSource);
+                return true; // succeeded
+            }
+
+            return false; // Mica is not supported on this system
+
+        }
+
+        private void Window_Activated(object sender, WindowActivatedEventArgs args)
+        {
+            configSource.IsInputActive = args.WindowActivationState != WindowActivationState.Deactivated;
+        }
+
+        private void Window_Closed(object sender, WindowEventArgs args)
+        {
+            // Make sure any Mica/Acrylic controller is disposed so it doesn't try to
+            // use this closed window.
+            if (micaController != null)
+            {
+                micaController.Dispose();
+                micaController = null;
+            }
+            this.Activated -= Window_Activated;
+            configSource = null;
+        }
+
+        private void Window_ThemeChanged(FrameworkElement sender, object args)
+        {
+            if (configSource != null)
+            {
+                SetConfigurationSourceTheme();
+            }
+        }
+
+        private void SetConfigurationSourceTheme()
+        {
+            switch (((FrameworkElement)this.Content).ActualTheme)
+            {
+                case ElementTheme.Dark: configSource.Theme = Microsoft.UI.Composition.SystemBackdrops.SystemBackdropTheme.Dark; break;
+                case ElementTheme.Light: configSource.Theme = Microsoft.UI.Composition.SystemBackdrops.SystemBackdropTheme.Light; break;
+                case ElementTheme.Default: configSource.Theme = Microsoft.UI.Composition.SystemBackdrops.SystemBackdropTheme.Default; break;
+            }
         }
 
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
