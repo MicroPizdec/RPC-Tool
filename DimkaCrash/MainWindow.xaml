@@ -209,6 +209,7 @@
         <StackPanel Orientation="Horizontal" Margin="48,0,0,15" HorizontalAlignment="Left" VerticalAlignment="Bottom">
             <Button x:Name="GoButton" Style="{StaticResource AccentButtonStyle}" x:Uid="Go" Click="GoButton_Click" />
             <Button x:Name="StopButton" x:Uid="Stop" IsEnabled="False" Margin="10,0,0,0" Click="StopButton_Click" />
+            <Button x:Name="DebugButton" Margin="10,0,0,0" Content="Toggle title bar" Click="DebugButton_Click" Visibility="Collapsed" />
         </StackPanel>
     </Grid>
 </Window> 

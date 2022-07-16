@@ -30,6 +30,7 @@ namespace DimkaCrash
         private DispatcherQueueHelper dqHelper;
         private Microsoft.UI.Composition.SystemBackdrops.MicaController micaController;
         private Microsoft.UI.Composition.SystemBackdrops.SystemBackdropConfiguration configSource;
+        private bool systemTitleBarDisabled = true;
 
         public MainWindow()
         {
@@ -62,26 +63,22 @@ namespace DimkaCrash
                 dqHelper = new DispatcherQueueHelper();
                 dqHelper.EnsureWindowsSystemDispatcherQueueController();
 
-                // Hooking up the policy object
                 configSource = new Microsoft.UI.Composition.SystemBackdrops.SystemBackdropConfiguration();
                 this.Activated += Window_Activated;
                 this.Closed += Window_Closed;
                 ((FrameworkElement)this.Content).ActualThemeChanged += Window_ThemeChanged;
 
-                // Initial configuration state.
                 configSource.IsInputActive = true;
                 SetConfigurationSourceTheme();
 
                 micaController = new Microsoft.UI.Composition.SystemBackdrops.MicaController();
 
-                // Enable the system backdrop.
-                // Note: Be sure to have "using WinRT;" to support the Window.As<...>() call.
                 micaController.AddSystemBackdropTarget(this.As<Microsoft.UI.Composition.ICompositionSupportsSystemBackdrop>());
                 micaController.SetSystemBackdropConfiguration(configSource);
-                return true; // succeeded
+                return true;
             }
 
-            return false; // Mica is not supported on this system
+            return false;
 
         }
 
@@ -92,8 +89,6 @@ namespace DimkaCrash
 
         private void Window_Closed(object sender, WindowEventArgs args)
         {
-            // Make sure any Mica/Acrylic controller is disposed so it doesn't try to
-            // use this closed window.
             if (micaController != null)
             {
                 micaController.Dispose();
@@ -456,5 +451,23 @@ namespace DimkaCrash
 
             SaveSuccess.IsOpen = true;
         }
+
+#if DEBUG
+        private void DebugButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (systemTitleBarDisabled)
+            {
+                ExtendsContentIntoTitleBar = false;
+                SetTitleBar(null);
+                systemTitleBarDisabled = false;
+            }
+            else
+            {
+                ExtendsContentIntoTitleBar = true;
+                SetTitleBar(AppTitleBar);
+                systemTitleBarDisabled = true;
+            }
+        }
     }
+#endif
 }
