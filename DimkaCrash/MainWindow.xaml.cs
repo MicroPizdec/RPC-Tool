@@ -268,6 +268,11 @@ namespace DimkaCrash
             StopButton.IsEnabled = false;
         }
 
+        private void ClientIDTeachingTip_Click(object sender, RoutedEventArgs e)
+        {
+            Tip1.IsOpen = true;
+        }
+
         private string ToJson()
         {
             ulong startTimestamp = 0;
